@@ -1,0 +1,165 @@
+1. List the commands for adding, updating, and deleting data.
+
+  INSERT INTO is the command to add new data.
+  UPDATE is the command to update existing data.
+  DELETE FROM is the command to delete data.
+
+
+2. Explain the structure for each type of command.
+
+  INSERT INTO {name of table} ({name of comlunm}, {etc.}) VALUES ({value to be added},{etc})
+                                  columns are optional            values should be in same order as columns
+
+  UPDATE {table name} SET {column name}={value to be changed to} WHERE {condition}
+  Variables after SET are the changes to be made, and the variables after WHERE are the conditions to search for,
+  and can include be either exact or comparative ( = and <,>,etc.).
+
+  DELETE FROM {table name} WHERE {condition}
+  Works similar to update only it deletes data and there is no SET statement. This deletes whole rows.
+
+3. What are some of the data types that can be used in tables? Give a real-world example of each type.
+
+  There are a lot of different data types that can be used in tables. Common ones include "int" which is while numbers
+  like 14. Could represent 14 ducks in a pond. Another is "text" like "hello world". This can be used for names
+  and other statements. One more is "numeric", which represents a given format of a number like "000.00" for 5 digits and 
+  2 decimals or "0000.000" for 7 digits and 3 decimals.
+
+4. Decide how to create a new table to hold a list of people invited to a wedding dinner. The table needs to have first 
+and last names, whether they sent in their RSVP, the number of guests they are bringing, and the number of meals 
+(1 for adults and 1/2 for children).
+
+Which data type would you use to store each of the following pieces of information?
+First and last name.
+  varchar
+
+Whether they sent in their RSVP.
+  bit
+
+Number of guests.
+  int
+
+Number of meals.
+  decimal
+
+Write a command that creates the table to track the wedding dinner.
+  CREATE TABLE wedding (
+    name: varchar(50),
+    rvsp: bit,
+    numGuests: int,
+    numMeals: int
+  );
+
+Write a command that adds a column to track whether the guest sent a thank you card.
+  ALTER TABLE wedding ADD COLUMN thankYouCard bit;
+
+You have decided to move the data about the meals to another table, so write a command to remove the column storing the 
+number meals from the wedding table.
+  ALTER TABLE wedding DROP COLUMN numMeals;
+
+The guests will need a place to sit at the reception, so write a command that adds a column for table number.
+  ALTER TABLE wedding ADD COLUMN tableNum int;
+
+The wedding is over and we do not need to keep this information, so write a command that deletes the table numbers from 
+the database.
+  ALTER TABLE wedding DROP COLUMN tableNum;
+
+
+5. Write a command to create a new table to hold the books in a library with the columns ISBN, title, author, genre, 
+publishing date, number of copies, and available copies.
+
+  CREATE TABLE books (
+    ISBN: varchar(20),
+    title: varchar(100),
+    author: varchar(50),
+    genres: varchar(100),
+    publishingDate: date,
+    numCopies: int,
+    availableCopies: int
+  );
+
+Find three books and add their information to the table.
+
+  INSERT INTO books
+  VALUES
+  ("97803995869340399586938", "The French Girl", "Elliot, Lexie", "Fiction, Thriller, Mystery, Suspense, Psychological 
+  thriller, Psychological Fiction", 2018-02-18  30, 5),
+  ("97800623899230062389920", "Sunburn: a novel", "Lippman, Laura", "Fiction, Thriller, Suspense, Psychological thriller, 
+  Psychological Fiction", 2018-02-20, 83, 18),
+  ("97815247609841524760986", "The chalk man: a novel", "Tudor, C.J.", "Fiction, Thriller, Mystery, Suspense, Psychological 
+  thriller, Psychological Fiction", 2018-01-09, 11, 6)
+
+Someone has just checked out one of the books. Change the number of available copies to 1 fewer.
+
+  UPDATE books SET availableCopies = availableCopies - 1 WHERE ISBN = "97815247609841524760986";
+
+Now one of the books has been added to the banned books list. Remove it from the table.
+
+  DELETE FROM books WHERE ISBN = "97800623899230062389920";
+
+
+6. Write a command to make a new table to hold spacecrafts. Information should include id, name, year launched, 
+country of origin, a brief description of the mission, orbiting body, if it is currently operating, and its approximate 
+miles from Earth. In addition to the table creation, provide commands that perform the following operations:
+
+  CREATE TABLE spacecrafts (
+    id: int,
+    name: varchar(50),
+    yearLaunched: varchar(4),
+    countryOrigin: varchar(50),
+    description: varchar(200),
+    orbitingBody: varchar(20),
+    isOperating: bit,
+    milesFromEarth: decimal,
+  )
+
+Add three non-Earth-orbiting satellites to the table.
+
+  INSERT INTO spacecraft
+  VALUES
+  (1, "Artemis P1/P2", 2007, "United States", "ARTEMIS P1/P2 are studying the effect of the solar wind on the Moon. 
+  Originally launched as Earth satellites, they were later repurposed and moved to lunar orbit."), "moon", 1, 238900),
+  (2, "Akatsuki", 2010, "Japan", "The first Japanese Venusian probe. Also known as Planet-C and Venus Climate Orbiter, 
+  Akatsuki failed to enter Venusian orbit in December 2010. It continued to function and entered Venus orbit in 2015.", "venus", 1, 162000000),
+  (3, "New Horizens" , 2006, New Horizons is the first spacecraft to study Pluto up close, and ultimately the Kuiper 
+  Belt. It is the fastest artificially-accelerated object and will be the fifth probe to leave the solar system.", "pluto", 1, 2700000000)
+
+
+Remove one of the satellites from the table since it has just crashed into the planet.
+
+  DELETE FROM spacecraft WHERE id=1;
+
+Edit another satellite because it is no longer operating and change the value to reflect that.
+
+  UPDATE spacecraft SET isOperating = 0 WHERE id=2;
+
+7. Write a command to create a new table to hold the emails in your inbox. This table should include an id, the subject 
+line, the sender, any additional recipients, the body of the email, the timestamp, whether or not you have read the email, 
+and the id of the email chain it's in. Also provide commands that perform the following operations:
+
+CREATE TABLE inbox (
+  id: int,
+  subject: varchar(20),
+  sender: varchar(50),
+  recipients: varchar(200),
+  body: varchar(MAX),
+  timeStamp: timestamp,
+  isRead: bit;
+  idChain: int
+)
+
+Add three new emails to the inbox.
+
+INSERT INTO inbox 
+VALUES
+(1, "Coding miester", "yoman@gmail.com", "", "Bring everything you got. We'll meet at the old warehouse.", timestamp, 0, 235),
+(2, "Still selling pc?", "rewanda234@yahoo.com", "Hey there, just anted to know if you were still selling that pc.", timestamp, 0, 256),
+(3, "How you doin", "mom101@gmail.com", "Hey this is your mom, just checking in to see how your doing, give me a call. Love Mom.", timestamp, 1, 243)
+
+You deleted one of the emails, so write a command to remove the row from the inbox table.
+
+DELETE FROM inbox WHERE id=2;
+
+You started reading an email but just heard a crash in another room. Mark the email as unread before investigating the crash, 
+so you can come back and read it later.
+
+UPDATE inbox SET isREAD=0 WHERE id=3;
