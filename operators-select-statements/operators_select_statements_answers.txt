@@ -87,12 +87,6 @@ breed column may have multiple words (for example, "Labrador Collie mix").
 
 6. List each comparison operator and explain when you would use it. Include a real world example for each.
 
-  LIKE is used to look for comparisons within strings and can be used to look for a specific word or phrase.
-  For example, it could find all the items in a store that contain the string "usb".
-
-  NOT LIKE is the opposite of like and only show values that dont contain the string being compared.
-  FOR example, it could return all the items that dont contain "fan".
-
   '<' is less than, and is used to find values less than a given value.
   For example, return all the plane tickets less than 200 dollars.
 
@@ -111,6 +105,32 @@ breed column may have multiple words (for example, "Labrador Collie mix").
   '=' is equal to a given value.
   For example, return all the vacation locations that are in the "United States"
 
+  '<>' greater than or less than, used to co,pare if given value is greater or less than another value. Similar to '!='.
+  For example, is the price of this item greater or less than the price of that item.
+
+  LIKE is used to look for comparisons within strings and can be used to look for a specific word or phrase.
+  For example, it could find all the items in a store that contain the string "usb".
+
+  BETWEEN is used to tell if one value is between or equal to two other values.
+  FOR example, is 20 BETWEEN 10 AND 34, would return the value 20.
+
+  IS DISTINCT FROM is similar to '<>' but should be used instead if one of the inputs could possibly be null.
+  For example, if both values were null it would return false, if only one was null, it would return true.
+
+  IS TRUE/IS FALSE is used to determine if an expression is true or false.
+  For example, 20 < 30 IS TRUE, would return true.
+
+  IS NULL returns true if contents of cell are null.
+  For example, NULL IS NULL would return true, but false otherwise.
+
+  AND requires both condtitions to be true for value to be returned.
+  For example, 20 < 30 AND 55 > 2.
+
+  OR  requires only one condition to be true for value to be returned.
+  For example, 20 < 30 OR 55 < 2.
+
+  NOT Requires condition to be false to be returned.
+  For example, NOT 55 < 2.
 
 7. From the cats table, what data is returned from these queries?
 
